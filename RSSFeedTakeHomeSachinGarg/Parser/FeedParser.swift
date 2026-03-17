@@ -41,28 +41,24 @@ class FeedParser: NSObject, XMLParserDelegate {
             current = ParsedFeedItem()
         }
         
-        if currentItem == "link",
-           let url = attributeDict["href"] {
-            current.link = url
+         if currentItem == "link" {
+            
+            // Image link with enclosure
+            if let rel = attributeDict["rel"],
+               rel == "enclosure",
+               let type = attributeDict["type"],
+               type.contains("image"),
+               let href = attributeDict["href"] {
+                current.imageUrl = href
+                return
+            }
+            
+            // Story link
+            if let href = attributeDict["href"] {
+                current.link = href
+            }
         }
-        
-        if currentItem == "link",
-           let type = attributeDict["type"],
-           let imageURl = attributeDict["href"] {
-            current.imageUrl = imageURl
-        }
-        
-        
-        if currentItem == "enclosure",
-           let url = attributeDict["url"] {
-            current.imageUrl = url
-        }
-        
-        
-        if currentItem == "media:thumbnail",
-           let url = attributeDict["url"] {
-            current.imageUrl = url
-        }
+
         accumulator = ""
     }
     

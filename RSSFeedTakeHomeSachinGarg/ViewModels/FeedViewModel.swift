@@ -7,11 +7,12 @@
 
 import Foundation
 
+@MainActor
 class FeedViewModel: ObservableObject {
-    private let repository: FeedRepository
+    private let repository: FeedRepositoryProtocol
     @Published var state: State = .idle
     
-    init(repo: FeedRepository) {
+    init(repo: FeedRepositoryProtocol) {
         self.repository = repo
     }
     

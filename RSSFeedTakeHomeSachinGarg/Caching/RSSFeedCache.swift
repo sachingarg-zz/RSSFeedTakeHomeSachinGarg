@@ -7,7 +7,12 @@
 
 import Foundation
 
-class CacheFeedFile {
+protocol CacheFeedFileProtocol {
+    func saveCache(items: [FeedItem]) throws
+    func loadFromCache() throws -> [FeedItem]
+}
+
+class CacheFeedFile: CacheFeedFileProtocol {
     private let fileUrl: URL = {
         let repo = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         return repo.appendingPathExtension("feedCache.json")

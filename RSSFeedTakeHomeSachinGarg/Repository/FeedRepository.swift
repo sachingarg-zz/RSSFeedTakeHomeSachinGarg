@@ -7,7 +7,12 @@
 
 import Foundation
 
-class FeedRepository {
+protocol FeedRepositoryProtocol {
+    func fetchFeed() async throws -> [FeedItem]
+    func getSavedFeed() throws -> [FeedItem]
+}
+
+class FeedRepository: FeedRepositoryProtocol {
     private let client: FeedClient
     private let parser: FeedParser
     private let feedUrl: URL
@@ -34,7 +39,7 @@ class FeedRepository {
         try cache.loadFromCache()
     }
     
-    func fetchAndSave() async throws ->  [FeedItem] {
+    private func fetchAndSave() async throws ->  [FeedItem] {
         let data = try await client.fetchFeed(from: feedUrl)
         let paresedData = try parser.parseData(data: data)
         let dateFormat = DateFormatter()
@@ -47,8 +52,7 @@ class FeedRepository {
             }
             
             let publishDate = dateFormat.date(from: feed.publishDate) ?? Date()
-            
-             let imageUrl = URL(string: feed.imageUrl) ?? nil
+            let imageUrl = URL(string: feed.imageUrl) ?? nil
             
             
             return FeedItem(id: feed.guid, title: feed.title, htmlDescription: feed.description, publishDate: publishDate, imageUrl: imageUrl, linkUrl: link)
