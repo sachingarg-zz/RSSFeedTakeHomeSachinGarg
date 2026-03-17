@@ -11,7 +11,8 @@ import SwiftUI
 struct RSSFeedTakeHomeSachinGargApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let repository = FeedRepository(client: FeedClient(), parser: FeedParser(), feedUrl: URL(string: "https://www.apple.com/newsroom/rss-feed.rss")!, cache: CacheFeedFile())
+            FeedListView(feedListViewModel: FeedViewModel(repo: repository))
         }
     }
 }

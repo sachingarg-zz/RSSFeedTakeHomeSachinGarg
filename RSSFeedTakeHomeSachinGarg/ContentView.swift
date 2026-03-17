@@ -8,14 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    let repository = FeedRepository(client: FeedClient(), parser: FeedParser(), feedUrl: URL(string: "https://www.apple.com/newsroom/rss-feed.rss")!, cache: CacheFeedFile())
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        FeedListView(feedListViewModel: FeedViewModel(repo: repository))
     }
 }
 
