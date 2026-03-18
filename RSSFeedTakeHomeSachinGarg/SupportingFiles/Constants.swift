@@ -27,6 +27,19 @@ enum FeedType: String, Identifiable, CaseIterable {
             return URL(string: "https://rss.marketingtools.apple.com/api/v2/us/books/top-free/10/books.json")!
         }
     }
+    
+    var iconName: String {
+        switch self {
+        case .music:
+            "music.note"
+        case .podcasts:
+            "mic.fill"
+        case .apps:
+            "app.fill"
+        case .books:
+            "book.closed.fill"
+        }
+    }
 }
 
 

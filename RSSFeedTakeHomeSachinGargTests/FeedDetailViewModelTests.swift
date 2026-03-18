@@ -44,10 +44,10 @@ final class FeedDetailViewModelTests: XCTestCase {
         
     }
     
-    func testFeedViewModel_loadsItems_throw_error() async throws {
+    func testFeedViewModel_loadsItems_throw_networkError() async throws {
         // given
         let mockService = MockAPIService()
-        mockService.shouldThrow = true
+        mockService.shouldThrow = .networkError(URLError(.notConnectedToInternet))
         
         let vm = await FeedDetailViewModel<Music>(url: URL(string: "https://apple.com")!, service: mockService)
         
@@ -56,7 +56,8 @@ final class FeedDetailViewModelTests: XCTestCase {
         
         // then
         await MainActor.run {
-            XCTAssertTrue(vm.feedItems.isEmpty)
+            XCTAssertNotNil(vm.error)
+            XCTAssertEqual(vm.error, .networkError(URLError(.notConnectedToInternet)))
         }
         
         

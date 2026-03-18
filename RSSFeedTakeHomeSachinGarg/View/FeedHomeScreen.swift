@@ -12,8 +12,11 @@ struct FeedHomeScreen: View {
         NavigationStack {
             Section("Categories") {
                 List(FeedType.allCases) { feed in
-                    NavigationLink(feed.rawValue) {
+                    NavigationLink {
                         FeedTypeListBuilder.build(for: feed)
+                    } label: {
+                        Label(feed.rawValue, systemImage: feed.iconName)
+                            .foregroundColor(.blue)
                     }
                 }
             }

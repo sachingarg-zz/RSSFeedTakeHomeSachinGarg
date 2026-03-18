@@ -8,9 +8,10 @@
 import Foundation
 
 @MainActor
-class FeedDetailViewModel<T: FeedDisplayable & Decodable>: ObservableObject {
+class FeedDetailViewModel<T: FeedModelProtocol>: ObservableObject {
     @Published var feedItems: [T] = []
     @Published var title: String = ""
+    @Published var error: AppError?
     
     let networkService: APIServiceProtocol
     let url: URL
@@ -25,8 +26,11 @@ class FeedDetailViewModel<T: FeedDisplayable & Decodable>: ObservableObject {
             let response: FeedResponse<T> = try await networkService.fetch(from: url)
             self.feedItems = response.feed.results
             self.title = response.feed.title
+            self.error = nil
+        } catch let appError as AppError {
+            self.error = appError
         } catch {
-            print(error.localizedDescription)
+            self.error = .unknown
         }
     }
 }

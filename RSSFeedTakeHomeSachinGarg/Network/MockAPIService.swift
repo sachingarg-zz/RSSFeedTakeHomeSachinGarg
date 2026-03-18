@@ -9,11 +9,11 @@ import Foundation
 
 class MockAPIService: APIServiceProtocol {
     var mockResult: Any?
-    var shouldThrow = false
+    var shouldThrow: AppError?
     
     func fetch<T>(from url: URL) async throws -> T where T : Decodable {
-        if shouldThrow {
-            throw URLError(.badServerResponse)
+        if let  error = shouldThrow {
+            throw error
         }
         return mockResult as! T
     }
