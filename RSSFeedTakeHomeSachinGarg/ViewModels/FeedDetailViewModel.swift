@@ -12,6 +12,7 @@ class FeedDetailViewModel<T: FeedModelProtocol>: ObservableObject {
     @Published var feedItems: [T] = []
     @Published var title: String = ""
     @Published var error: AppError?
+    @Published var isLoading = false
     
     let networkService: APIServiceProtocol
     let url: URL
@@ -22,6 +23,9 @@ class FeedDetailViewModel<T: FeedModelProtocol>: ObservableObject {
     }
     
     func loadFeed() async {
+        isLoading = true
+        defer { isLoading = false }
+        
         do {
             let response: FeedResponse<T> = try await networkService.fetch(from: url)
             self.feedItems = response.feed.results

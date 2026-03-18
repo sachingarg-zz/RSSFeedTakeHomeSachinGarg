@@ -1,5 +1,5 @@
 //
-//  FeedItemDetailScreen.swift
+//  FeedDetailViewScreen.swift
 //  RSSFeedTakeHomeSachinGarg
 //
 //  Created by sachin garg on 3/17/26.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FeedItemDetailScreen<T: FeedModelProtocol>: View {
+struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
     let feed: T
     
     var body: some View {

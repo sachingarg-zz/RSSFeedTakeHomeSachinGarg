@@ -30,5 +30,5 @@ struct FeedRow<T: FeedModelProtocol>: View {
 }
 
 #Preview {
-    FeedRow(feed: Music(id: "1", artistName: "artistName", name: "name", artworkUrl100: "artwork", releaseDate: "2026-09-09", kind: "Test"))
+    FeedRow(feed: MusicItem(id: "1", artistName: "artistName", name: "name", artworkUrl100: "artwork", releaseDate: "2026-09-09", kind: "Test"))
 }

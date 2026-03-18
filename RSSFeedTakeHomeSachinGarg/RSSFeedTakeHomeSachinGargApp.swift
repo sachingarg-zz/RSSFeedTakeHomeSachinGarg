@@ -11,7 +11,7 @@ import SwiftUI
 struct RSSFeedTakeHomeSachinGargApp: App {
     var body: some Scene {
         WindowGroup {
-            FeedHomeScreen()
+            FeedLandingScreen()
         }
     }
 }

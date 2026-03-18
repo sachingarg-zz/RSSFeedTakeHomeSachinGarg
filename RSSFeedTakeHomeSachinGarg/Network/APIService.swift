@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol APIServiceProtocol {
-    func fetch<T: Decodable>(from url: URL) async throws -> T
-}
-
 final class APIService: APIServiceProtocol {
     func fetch<T>(from url: URL) async throws -> T where T : Decodable {
         do {

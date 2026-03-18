@@ -1,8 +1,8 @@
 //
-//  Constants.swift
+//  FeedType1.swift
 //  RSSFeedTakeHomeSachinGarg
 //
-//  Created by sachin garg on 3/17/26.
+//  Created by sachin garg on 3/18/26.
 //
 
 import Foundation
@@ -41,5 +41,4 @@ enum FeedType: String, Identifiable, CaseIterable {
         }
     }
 }
-
 

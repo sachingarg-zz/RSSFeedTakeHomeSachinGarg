@@ -1,5 +1,5 @@
 //
-//  FeedHomeScreen.swift
+//  FeedLandingScreen.swift
 //  RSSFeedTakeHomeSachinGarg
 //
 //  Created by sachin garg on 3/17/26.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FeedHomeScreen: View {
+struct FeedLandingScreen: View {
     var body: some View {
         NavigationStack {
             Section("Categories") {
@@ -30,17 +30,17 @@ enum FeedTypeListBuilder {
     static func build(for feed: FeedType) -> some View {
         switch feed {
         case .music:
-            FeedDetailScreen<Music>(url: feed.url)
+            FeedListViewScreen<MusicItem>(url: feed.url)
         case .podcasts:
-            FeedDetailScreen<PodCast>(url: feed.url)
+            FeedListViewScreen<PodCastItem>(url: feed.url)
         case .apps:
-            FeedDetailScreen<AppItem>(url: feed.url)
+            FeedListViewScreen<AppItem>(url: feed.url)
         case .books:
-            FeedDetailScreen<BookItem>(url: feed.url)
+            FeedListViewScreen<BookItem>(url: feed.url)
         }
     }
 }
 
 #Preview {
-    FeedHomeScreen()
+    FeedLandingScreen()
 }
