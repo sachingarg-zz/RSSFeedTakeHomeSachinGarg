@@ -20,7 +20,7 @@ class FeedDetailViewModel<T: FeedDisplayable & Decodable>: ObservableObject {
         self.networkService = service
     }
     
-    func loadFeed() async{
+    func loadFeed() async {
         do {
             let response: FeedResponse<T> = try await networkService.fetch(from: url)
             self.feedItems = response.feed.results

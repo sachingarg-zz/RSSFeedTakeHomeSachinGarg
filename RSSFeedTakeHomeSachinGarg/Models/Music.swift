@@ -7,15 +7,6 @@
 
 import Foundation
 
-typealias  FeedModelProtocol = Decodable & Identifiable & FeedDisplayable
-protocol FeedDisplayable {
-    var titleText: String { get }
-    var artistDisplayName: String { get }
-    var image: String { get }
-    var releaseDateText: String { get }
-    var categoryText: String { get }
-}
-
 struct Music: Decodable, Identifiable {
     let id: String
     let artistName: String
