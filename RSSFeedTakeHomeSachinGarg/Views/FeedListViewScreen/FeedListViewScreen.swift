@@ -37,12 +37,13 @@ struct FeedListViewScreen<T: FeedModelProtocol>: View {
         .task {
             await viewModel.loadFeed()
         }
+        .searchable(text: $viewModel.searchText, prompt: "Search...")
         
     }
     
     @ViewBuilder
     private var listView: some View {
-        List(viewModel.feedItems) { feed in
+        List(viewModel.searchedItems) { feed in
             NavigationLink {
                 FeedDetailViewScreen(feed: feed)
             } label: {

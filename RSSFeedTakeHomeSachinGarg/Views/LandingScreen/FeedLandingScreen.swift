@@ -16,14 +16,24 @@ struct FeedLandingScreen: View {
     var body: some View {
         NavigationStack {
         VStack(spacing: 20) {
-            Picker("Linit", selection: $limit) {
-                ForEach(limits, id: \.self) { value in
-                    Text("\(value)").tag(value)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding(.horizontal)
             
+            VStack {
+                Text("Select Feed Limit")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
+                Picker("limit", selection: $limit) {
+                    ForEach(limits, id: \.self) { value in
+                        Text("\(value)").tag(value)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .padding(.horizontal)
+
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(FeedType.allCases) { type in
