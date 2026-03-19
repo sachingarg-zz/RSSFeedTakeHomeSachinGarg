@@ -11,7 +11,7 @@ struct FeedRow<T: FeedModelProtocol>: View {
     let feed: T
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: feed.image)) { image in
+            AsyncImage(url: URL(string: feed.artworkUrl)) { image in
                 image.resizable().scaledToFit()
             } placeholder: {
                 ProgressView()
@@ -21,7 +21,7 @@ struct FeedRow<T: FeedModelProtocol>: View {
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(feed.titleText).font(.headline)
-                Text(feed.artistDisplayName).font(.caption)
+                Text(feed.subtitleText).font(.caption)
                     .foregroundStyle(.secondary)
                 
             }
@@ -30,5 +30,5 @@ struct FeedRow<T: FeedModelProtocol>: View {
 }
 
 #Preview {
-    FeedRow(feed: MusicItem(id: "1", artistName: "artistName", name: "name", artworkUrl100: "artwork", releaseDate: "2026-09-09", kind: "Test"))
+    FeedRow(feed: MusicItem(id: "1", artistName: "artist", name: "name", artworkUrl100: "url", releaseDate: "2026-03-03", url: "", genres: [Genre(name: "name")]))
 }

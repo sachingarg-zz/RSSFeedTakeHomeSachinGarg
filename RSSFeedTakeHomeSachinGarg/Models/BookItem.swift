@@ -13,12 +13,15 @@ struct BookItem: Decodable, Identifiable {
     let artworkUrl100: String
     let releaseDate: String
     let kind: String
+    let url: String
 }
 
 extension  BookItem: FeedDisplayable {
-    var artistDisplayName: String { artistName }
     var titleText: String { name }
-    var image: String { artworkUrl100 }
-    var releaseDateText: String { releaseDate }
+    var subtitleText: String { artistName }
+    var artworkUrl: String { artworkUrl100}
     var categoryText: String { kind }
+    var releaseDateText: String { releaseDate }
+    var previewUrlText: String? { nil }
+    var storeUrlText: String? { url }
 }

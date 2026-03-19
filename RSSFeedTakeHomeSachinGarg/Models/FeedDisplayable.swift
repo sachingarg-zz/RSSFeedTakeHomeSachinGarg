@@ -10,13 +10,12 @@ import Foundation
 typealias  FeedModelProtocol = Decodable & Identifiable & FeedDisplayable
 
 protocol FeedDisplayable {
+    var id: String { get }
     var titleText: String { get }
-    var artistDisplayName: String { get }
-    var image: String { get }
-    var releaseDateText: String { get }
+    var subtitleText: String { get }
+    var artworkUrl: String { get }
     var categoryText: String { get }
-    
-    // New optioanl type feature properties
-//    var appStoreUrl: String? { get }
-//    var previewUrl: String? { get }
+    var releaseDateText: String { get }
+    var previewUrlText: String? { get }
+    var storeUrlText: String? { get }
 }

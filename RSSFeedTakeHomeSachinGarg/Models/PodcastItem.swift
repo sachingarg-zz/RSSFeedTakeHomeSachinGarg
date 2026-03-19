@@ -10,14 +10,16 @@ struct PodCastItem: Decodable, Identifiable {
     let artistName: String
     let name: String
     let artworkUrl100: String
-    let releaseDate: String
-    let kind: String
+    let url: String
+   let genres: [Genre]
 }
 
 extension PodCastItem: FeedDisplayable {
-    var artistDisplayName: String { artistName }
     var titleText: String { name }
-    var image: String { artworkUrl100 }
-    var releaseDateText: String { releaseDate }
-    var categoryText: String { kind }
+    var subtitleText: String { artistName }
+    var artworkUrl: String { artworkUrl100 }
+    var categoryText: String {  genres.first?.name ?? "Podcast" }
+    var releaseDateText: String { "Explicit" }
+    var previewUrlText: String? { nil }
+    var storeUrlText: String? { url }
 }

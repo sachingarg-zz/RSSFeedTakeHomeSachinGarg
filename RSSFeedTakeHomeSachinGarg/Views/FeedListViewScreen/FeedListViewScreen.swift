@@ -73,5 +73,5 @@ struct FeedListViewScreen<T: FeedModelProtocol>: View {
 }
 
 #Preview {
-    FeedListViewScreen<MusicItem>(url: FeedType.music.url)
+    FeedListViewScreen<MusicItem>(url: FeedType.music.url(limit: 10))
 }

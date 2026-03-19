@@ -1,11 +1,13 @@
 //
-//  AppItem.swift
+//  AudioBookItem.swift
 //  RSSFeedTakeHomeSachinGarg
 //
 //  Created by sachin garg on 3/18/26.
 //
 
-struct AppItem: Decodable, Identifiable {
+import Foundation
+
+struct AudioBookItem: Decodable, Identifiable {
     let id: String
     let artistName: String
     let name: String
@@ -14,12 +16,12 @@ struct AppItem: Decodable, Identifiable {
     let url: String
 }
 
-extension  AppItem: FeedDisplayable {
+extension AudioBookItem: FeedDisplayable {
     var titleText: String { name }
     var subtitleText: String { artistName }
-    var artworkUrl: String { artworkUrl100 }
+    var artworkUrl: String { artworkUrl100}
+    var categoryText: String { "Audio Book" }
+    var releaseDateText: String { releaseDate }
     var previewUrlText: String? { nil }
     var storeUrlText: String? { url }
-    var releaseDateText: String { releaseDate }
-    var categoryText: String { "App" }
 }
