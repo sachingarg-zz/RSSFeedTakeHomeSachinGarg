@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-//This could ne if need gloabal or reusable component
-struct ErrorView: View {
+//This could be if need gloabal or reusable component
+struct ErrorBannerView: View {
     let error: AppError
+    let retryAction: (() -> Void)?
     
-    init(error: AppError) {
+    init(error: AppError, retryAction: (() -> Void)? = nil) {
         self.error = error
+        self.retryAction = retryAction
     }
     var body: some View {
         VStack(spacing: 12.0) {
@@ -24,8 +26,8 @@ struct ErrorView: View {
                 .cornerRadius(8)
             
             Button("Retry") {
-                
-            } 
+                retryAction?()
+            }
         }
         
         

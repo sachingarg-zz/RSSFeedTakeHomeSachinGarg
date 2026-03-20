@@ -24,7 +24,7 @@ enum FeedType: String, Identifiable, CaseIterable {
         case .podcasts:
             return "https://rss.marketingtools.apple.com/api/v2/us/podcasts/top"
         case .apps:
-            return "https://rss.marketingtools.apple.com/api/v2/us/apps/top-free"
+            return "https://rss.marketingtools.apple.cm/api/v2/us/apps/top-free"
         case .books:
             return "https://rss.marketingtools.apple.com/api/v2/us/books/top-free"
         case .audioBooks:

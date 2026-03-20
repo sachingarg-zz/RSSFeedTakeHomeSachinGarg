@@ -38,7 +38,12 @@ struct FeedListViewScreen<T: FeedModelProtocol>: View {
                 .background(Color(.systemBackground))
             }
             else if let error = viewModel.error {
-                errorView(error: error)
+                ErrorBannerView(error: error) {
+                    Task {
+                        viewModel.isLoaded = false
+                        await viewModel.loadFeed()
+                    }
+                }
             } else {
                     listView
             }
@@ -60,26 +65,6 @@ struct FeedListViewScreen<T: FeedModelProtocol>: View {
                 FeedRow(feed: feed)
             }
         }
-    }
-    
-    @ViewBuilder
-    private func errorView(error: AppError) -> some View {
-        VStack(spacing: 12.0) {
-            Text(error.localizedDescription)
-                .foregroundColor(.white)
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.red.opacity(0.8))
-                .cornerRadius(8)
-            
-            Button("Retry") {
-                Task {
-                    await viewModel.loadFeed()
-                }
-            }
-            .padding(.top, 5)
-        }
-        .padding()
     }
 }
 
