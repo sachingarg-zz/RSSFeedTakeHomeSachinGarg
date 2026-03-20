@@ -29,16 +29,24 @@ struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
                         .font(.largeTitle.bold())
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
+                        .accessibilityIdentifier("Detail_Title")
+
                     
                     //Artist
                     Text(feed.subtitleText)
                         .font(.title3)
                         .foregroundStyle(.secondary)
+                        .accessibilityIdentifier("Sub_Title")
+
                 }
                 
                 VStack(spacing: 14) {
                     infoRow(label: "Category", value: feed.categoryText)
+                        .accessibilityIdentifier("Category")
+
                     infoRow(label: "Release Date", value: feed.releaseDateText)
+                        .accessibilityIdentifier("Release_date")
+
                 }
                 .padding()
                 .background(.ultraThinMaterial)
@@ -60,6 +68,8 @@ struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .padding(.horizontal)
+                    .accessibilityIdentifier("Play_Preview")
+
 
                 }
                 
@@ -76,6 +86,8 @@ struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .padding(.horizontal)
+                    .accessibilityIdentifier("Detail_OpenStore")
+
                 }
 
             }

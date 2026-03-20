@@ -25,6 +25,7 @@ struct FeedCard: View {
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 5)
         }
+        
     }
 }
 

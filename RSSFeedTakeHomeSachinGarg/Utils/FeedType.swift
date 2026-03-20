@@ -80,9 +80,9 @@ enum FeedType: String, Identifiable, CaseIterable {
 }
 
 extension FeedType {
-    func url(limit: Int) -> URL {
+    func urlString(limit: Int) -> String {
         let fullString = "\(baseURL)/\(limit)/\(endPoint).json"
-        return URL(string: fullString)!
+        return fullString
     }
 }
 

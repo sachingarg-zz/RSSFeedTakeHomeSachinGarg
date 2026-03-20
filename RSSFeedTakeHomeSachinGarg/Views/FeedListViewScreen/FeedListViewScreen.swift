@@ -10,8 +10,8 @@ import SwiftUI
 struct FeedListViewScreen<T: FeedModelProtocol>: View {
     @StateObject private var viewModel: FeedDetailViewModel<T>
     
-    init(url: URL) {
-        _viewModel = StateObject(wrappedValue: FeedDetailViewModel(url: url))
+    init(url: String) {
+        _viewModel = StateObject(wrappedValue: FeedDetailViewModel(urlString: url))
     }
     
     var body: some View {
@@ -74,5 +74,5 @@ struct FeedListViewScreen<T: FeedModelProtocol>: View {
 }
 
 #Preview {
-    FeedListViewScreen<MusicItem>(url: FeedType.music.url(limit: 10))
+    FeedListViewScreen<MusicItem>(url: FeedType.music.urlString(limit: 10))
 }

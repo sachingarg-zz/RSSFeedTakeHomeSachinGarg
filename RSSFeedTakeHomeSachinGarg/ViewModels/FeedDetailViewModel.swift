@@ -16,32 +16,36 @@ class FeedDetailViewModel<T: FeedModelProtocol>: ObservableObject {
     @Published var title: String = ""
     @Published var error: AppError?
     @Published var isLoading = false
+    @Published var isLoaded = false
+
     
     private var cancellables : Set<AnyCancellable> = []
     
     let networkService: APIServiceProtocol
-    let url: URL
+    let urlString: String
     
-    init(url: URL, service: APIServiceProtocol = APIService()) {
-        self.url = url
+    init(urlString: String, service: APIServiceProtocol = APIService()) {
+        self.urlString = urlString
         self.networkService = service
         setupSearch()
     }
     
     func loadFeed() async {
+        guard !isLoaded else { return }
+        isLoaded = true
         isLoading = true
         defer { isLoading = false }
         
         do {
-            let response: FeedResponse<T> = try await networkService.fetch(from: url)
+            let response: FeedResponse<T> = try await networkService.fetch(from: self.urlString)
             self.feedItems = response.feed.results
             self.title = response.feed.title
             self.searchedItems = self.feedItems
             self.error = nil
         } catch let appError as AppError {
             self.error = appError
-        } catch {
-            self.error = .unknown
+        } catch let error {
+            self.error = AppError.unknown(error)
         }
     }
     

@@ -28,6 +28,7 @@ struct FeedLandingScreen: View {
                     }
                 }
                 .pickerStyle(.segmented)
+                .accessibilityIdentifier("LimitPicker")
             }
             .padding()
             .background(.ultraThinMaterial)
@@ -41,6 +42,7 @@ struct FeedLandingScreen: View {
                             FeedTypeListBuilder.build(for: type, limit: limit)
                         } label: {
                             FeedCard(feed: type)
+                                .accessibilityIdentifier("FeedCard_\(type.rawValue)")
                         }
                     }
                 }
@@ -56,15 +58,15 @@ enum FeedTypeListBuilder {
     static func build(for feed: FeedType, limit: Int) -> some View {
         switch feed {
         case .music:
-            FeedListViewScreen<MusicItem>(url: feed.url(limit: limit))
+            FeedListViewScreen<MusicItem>(url: feed.urlString(limit: limit))
         case .podcasts:
-            FeedListViewScreen<PodCastItem>(url: feed.url(limit: limit))
+            FeedListViewScreen<PodCastItem>(url: feed.urlString(limit: limit))
         case .apps:
-            FeedListViewScreen<AppItem>(url: feed.url(limit: limit))
+            FeedListViewScreen<AppItem>(url: feed.urlString(limit: limit))
         case .books:
-            FeedListViewScreen<BookItem>(url: feed.url(limit: limit))
+            FeedListViewScreen<BookItem>(url: feed.urlString(limit: limit))
         case .audioBooks:
-            FeedListViewScreen<AudioBookItem>(url: feed.url(limit: limit))
+            FeedListViewScreen<AudioBookItem>(url: feed.urlString(limit: limit))
         }
     }
 }

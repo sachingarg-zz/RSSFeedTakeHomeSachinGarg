@@ -11,7 +11,7 @@ class MockAPIService: APIServiceProtocol {
     var mockResult: Any?
     var shouldThrow: AppError?
     
-    func fetch<T>(from url: URL) async throws -> T where T : Decodable {
+    func fetch<T>(from urlString: String) async throws -> T where T : Decodable {
         if let  error = shouldThrow {
             throw error
         }
