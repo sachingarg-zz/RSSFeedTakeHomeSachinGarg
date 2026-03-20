@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+/// A stylized card representing a single RSS feed category.
+///
+/// Features:
+/// - Gradient background
+/// - Large SF Symbol icon
+/// - Rounded corners
+/// - Shadow for depth
+/// Tapping the card triggers navigation to the feed list.
+
 struct FeedCard: View {
     let feed: FeedType
     var body: some View {

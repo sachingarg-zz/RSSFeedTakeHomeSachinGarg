@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+/// The app's landing screen where users select:
+/// - RSS feed category (grid UI)
+/// - Feed limit (segmented picker: 10, 25, 50)
+///
+/// The screen uses "Lazy VGrid' for an App-Store style layout.
+/// Each feed card navigates to'a type-safe generic 'FeedDetailScreen"
+
 struct FeedLandingScreen: View {
     @State private var limit = 10
     private let limits = [10, 20, 30]

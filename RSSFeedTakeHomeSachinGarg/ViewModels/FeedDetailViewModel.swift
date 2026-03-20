@@ -8,6 +8,23 @@
 import Foundation
 import Combine
 
+/// A generic view model to load and manage items from an Apple RSS feed.
+///
+/// - Note: This view model works for **any** type that conforms to:
+///
+/// - 'Decodable'
+///
+/// - "FeedDisplayable:
+/// - Parameters:
+/// - url: The RSS feed URL.
+/// - service: An object conforming to "APIServiceProtocol, injected for testing.
+///
+/// Example:
+///
+/// let vm = FeedDetailViewModel<BookItem> (url. feed.url)
+/// await vm.load ()
+
+
 @MainActor
 class FeedDetailViewModel<T: FeedModelProtocol>: ObservableObject {
     @Published var feedItems: [T] = []
@@ -29,6 +46,19 @@ class FeedDetailViewModel<T: FeedModelProtocol>: ObservableObject {
         self.networkService = service
         setupSearch()
     }
+    
+/// Loads data from the RSS feed and updates the UI state.
+///
+/// This method:
+/// - Fetches data asynchronously using 'APIService"
+/// - Maps errors to AppError
+/// - Applies initial filtering state
+///
+///- Returns: Nothing (updates @Published properties)
+/// - Throws: Never (errors are mapped to UI state)
+///
+/// Call from Swiftul using:
+///
     
     func loadFeed() async {
         guard !isLoaded else { return }

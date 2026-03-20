@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+/// A safe wrapper around 'AsyncImage that supports optional. URLs.
+///
+/// If the URL is:
+/// - 'nil': Shows placeholder
+/// - invalid: Shows fallback icon
+/// - loading: Shows 'ProgressView"
+///
+/// Usage:
+/// SafeAsyncImage (urlString: item.artworkUrl, size: .init(width: 200, height; 200))
+
 struct SafeAsyncImage: View {
     let urlString: String?
     let size: CGSize

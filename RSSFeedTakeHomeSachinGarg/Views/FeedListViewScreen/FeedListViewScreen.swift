@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+/// Displays a list of RSS feed items with search and navigation.
+///
+/// This view:
+/// - Fetches items via FeedDetailViewModel
+/// - Supports live search using
+/// searchable () *
+/// - Navigates to FeedItemDetailScreen
+///
+/// - Note: Generic over any 'FeedDisplayable' type.
+
 struct FeedListViewScreen<T: FeedModelProtocol>: View {
     @StateObject private var viewModel: FeedDetailViewModel<T>
     

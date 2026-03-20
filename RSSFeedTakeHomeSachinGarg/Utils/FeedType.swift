@@ -79,6 +79,14 @@ enum FeedType: String, Identifiable, CaseIterable {
     }
 }
 
+/// Builds the full RSS URL by injecting the selected item limit.
+/// Example:
+/// let url = FeedType.apps.url(limit: 25)
+///
+/// Final URL format:
+///*•
+/// https://rss.marketingtools.apple.com/api/v2/us/apps/top-free/25/apps.json
+/// 
 extension FeedType {
     func urlString(limit: Int) -> String {
         let fullString = "\(baseURL)/\(limit)/\(endPoint).json"

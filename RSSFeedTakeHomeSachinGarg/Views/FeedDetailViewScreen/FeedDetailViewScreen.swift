@@ -8,6 +8,18 @@
 import SwiftUI
 import AVFoundation
 
+/// Shows detailed information about a selected RSS item.
+///
+/// Includes:
+/// - Artwork image
+/// - Title, subtitle
+/// - Category
+/// - Release date
+/// - Optional preview button
+/// - Optional App Store link
+///
+/// Works with any type conforming to FeedDisplayable
+
 struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
     let feed: T
     @State private var animate = false

@@ -7,6 +7,13 @@
 
 import Foundation
 
+/// A service responsible for performing API
+/// requests using async/await.
+/// This class conforms to 'APIServiceProtocol and handles:
+/// - Data fetching
+/// - HTTP validation
+/// - Error mapping to 'AppError"
+
 final class APIService: APIServiceProtocol {
     let apiHandler: APIHandlerProtocol
     

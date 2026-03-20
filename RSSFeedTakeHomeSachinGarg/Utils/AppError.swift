@@ -7,6 +7,19 @@
 
 import Foundation
 
+
+/// Represents errors that can occur while fetching or decoding RSS da
+///
+/// Cases include:
+/// - invaliduRL
+/// - network
+/// - decoding
+/// - unknown
+///
+/// Conforms to:
+/// - 'LocalizedError
+/// - Equatable' (custom implementation)
+
 enum AppError: Error {
     case invalicUrl
     case invalidResponse

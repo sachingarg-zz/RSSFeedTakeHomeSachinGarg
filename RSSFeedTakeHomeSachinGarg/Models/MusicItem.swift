@@ -7,6 +7,19 @@
 
 import Foundation
 
+/// A model representing a book item returned from Apple RSS feed.
+///
+/// Example JSON:
+/// "id": "123"
+/// "name": "Sample Book", II1 "artistName": "Author"
+/// "releaseDate": "2024-01-01"
+/// }
+///
+/// Conforms to:
+/// - 'Decodable'
+///- Identifiable"
+/// - FeedDisplayable"
+
 struct Genre: Decodable{
     let name: String
 }
@@ -21,6 +34,19 @@ struct MusicItem: Decodable, Identifiable {
     let genres: [Genre]
     //let kind: String
 }
+
+/// A model representing a book item returned from Apple RSS feed.
+///
+/// Example JSON:
+/// "id": "123"
+/// "name": "Sample Book", II1 "artistName": "Author"
+/// "releaseDate": "2024-01-01"
+/// }
+///
+/// Conforms to:
+/// - 'Decodable'
+///- Identifiable"
+/// - FeedDisplayable"
 
 extension MusicItem: FeedDisplayable {
     var titleText: String { name }
