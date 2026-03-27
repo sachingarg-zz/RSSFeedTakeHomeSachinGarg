@@ -31,8 +31,9 @@ struct FeedCard: View {
                     .foregroundColor(.white)
             }
             .frame(height: 130)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .contentShape(Rectangle())
             .shadow(radius: 5)
+            .accessibilityElement(children: .combine)
         }
         
     }

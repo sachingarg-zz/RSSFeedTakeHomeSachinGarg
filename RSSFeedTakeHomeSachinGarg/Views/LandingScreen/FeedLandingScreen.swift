@@ -18,7 +18,10 @@ struct FeedLandingScreen: View {
     @State private var limit = 10
     private let limits = [10, 20, 30]
     
-    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
                                                   
     var body: some View {
         NavigationStack {
@@ -29,7 +32,7 @@ struct FeedLandingScreen: View {
                         .foregroundColor(.secondary)
                     
                     Picker("limit", selection: $limit) {
-                        ForEach(limits, id: \.self) { value in
+                        ForEach(Constants.Limits.options, id: \.self) { value in
                             Text("\(value)").tag(value)
                         }
                     }

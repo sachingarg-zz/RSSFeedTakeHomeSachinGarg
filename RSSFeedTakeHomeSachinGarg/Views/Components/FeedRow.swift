@@ -22,11 +22,14 @@ struct FeedRow<T: FeedModelProtocol>: View {
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(feed.titleText).font(.headline)
+                    .accessibilityIdentifier("FeedTitle_\(feed.id)")
                 Text(feed.subtitleText).font(.caption)
                     .foregroundStyle(.secondary)
-                
+                    .accessibilityIdentifier("FeedSubtitle_\(feed.id)")
             }
         }
+        .accessibilityIdentifier("FeedRow_\(feed.id)")
+        
     }
 }
 

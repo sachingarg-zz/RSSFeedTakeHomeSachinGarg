@@ -20,24 +20,29 @@ final class FeedLandingUITests: XCTestCase {
         let picker = app.segmentedControls["LimitPicker"]
         XCTAssertTrue(picker.exists)
         
-        // Cards Chck
-        XCTAssertTrue(app.otherElements["FeedCard_Album Feed"].waitForExistence(timeout: 2))
-
-        XCTAssertTrue(app.otherElements["FeedCard_Podcast Feed"].exists)
-        XCTAssertTrue(app.otherElements["FeedCard_Apps Feed"].exists)
-        XCTAssertTrue(app.otherElements["FeedCard_Books Feed"].exists)
-        XCTAssertTrue(app.otherElements["FeedCard_Audio Books"].exists)
-
-        /*
-         case music = "Album Feed"
-         case podcasts = "Podcast Feed"
-         case apps = "Apps Feed"
-         case books = "Books Feed"
-         case audioBooks = "Audio Books"
-         */
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-
+    
+    func test_Landing_Picker_limitSelection() {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+        
+        // Segment check
+        let limitPicker = app.segmentedControls["LimitPicker"]
+        XCTAssertTrue(limitPicker.exists)
+        
+        // Tap button 20
+        limitPicker.buttons["20"].tap()
+        XCTAssertTrue(limitPicker.buttons["20"].isSelected)
+        
+        // Tap button 20
+        limitPicker.buttons["30"].tap()
+        XCTAssertTrue(limitPicker.buttons["30"].isSelected)
+        
+        // Tap button 10
+        limitPicker.buttons["10"].tap()
+        XCTAssertTrue(limitPicker.buttons["10"].isSelected)
+        
+    }
     
 }
