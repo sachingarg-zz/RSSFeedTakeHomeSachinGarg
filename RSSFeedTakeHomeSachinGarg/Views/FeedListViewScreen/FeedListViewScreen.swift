@@ -65,7 +65,6 @@ struct FeedListViewScreen<T: FeedModelProtocol>: View {
                 FeedRow(feed: feed)
             }
         }
-        .accessibilityIdentifier("FeedList)")
 
     }
 }

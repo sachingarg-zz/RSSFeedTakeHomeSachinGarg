@@ -16,7 +16,6 @@ import SwiftUI
 
 struct FeedLandingScreen: View {
     @State private var limit = 10
-    private let limits = [10, 20, 30]
     
     let columns = [
         GridItem(.flexible()),
@@ -56,6 +55,7 @@ struct FeedLandingScreen: View {
                         }
                     }
                 }
+                .padding(.horizontal)
             }
             .navigationTitle(Constants.Texts.appTitle)
         }

@@ -5,7 +5,8 @@
 //  Created by sachin garg on 3/18/26.
 //
 
-import Foundation
+import XCTest
+@testable import RSSFeedTakeHomeSachinGarg
 
 class MockAPIService: APIServiceProtocol {
     var mockResult: Any?

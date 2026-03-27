@@ -55,16 +55,11 @@ enum FeedType: String, Identifiable, CaseIterable {
     // Mark: - Colors
     var gradient: [Color] {
         switch self {
-        case .music:
-            return [.red, .purple]
-        case .podcasts:
-            return [.purple, .pink]
-        case .apps:
-            return [.blue, .purple]
-        case .books:
-            return [.orange, .red]
-        case .audioBooks:
-            return [.teal, .cyan]
+        case .music:        return [.red, .purple]
+        case .podcasts:     return [.purple, .pink]
+        case .apps:         return [.blue, .purple]
+        case .books:        return [.orange, .red]
+        case .audioBooks:   return [.teal, .cyan]
         }
     }
 }
