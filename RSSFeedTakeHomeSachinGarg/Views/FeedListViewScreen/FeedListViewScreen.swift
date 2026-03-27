@@ -32,7 +32,7 @@ struct FeedListViewScreen<T: FeedModelProtocol>: View {
                         .progressViewStyle(CircularProgressViewStyle())
                         .scaleEffect(1.5)
                     
-                    Text("Loading...")
+                    Text(Constants.Texts.loading)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(.systemBackground))
@@ -52,7 +52,7 @@ struct FeedListViewScreen<T: FeedModelProtocol>: View {
         .task {
             await viewModel.loadFeed()
         }
-        .searchable(text: $viewModel.searchText, prompt: "Search...")
+        .searchable(text: $viewModel.searchText, prompt: Constants.Texts.searchPrompt)
         
     }
     

@@ -9,60 +9,50 @@ import Foundation
 import SwiftUI
 
 enum FeedType: String, Identifiable, CaseIterable {
-    case music = "Album Feed"
-    case podcasts = "Podcast Feed"
-    case apps = "Apps Feed"
-    case books = "Books Feed"
-    case audioBooks = "Audio Books"
+    case music
+    case podcasts
+    case apps
+    case books
+    case audioBooks
     
     var id: String { rawValue }
     
     var baseURL: String {
         switch self {
         case .music:
-            return "https://rss.marketingtools.apple.com/api/v2/us/music/most-played"
+            return Constants.RSSBaseURL.albums
         case .podcasts:
-            return "https://rss.marketingtools.apple.com/api/v2/us/podcasts/top"
+            return Constants.RSSBaseURL.podcasts
         case .apps:
-            return "https://rss.marketingtools.apple.cm/api/v2/us/apps/top-free"
+            return Constants.RSSBaseURL.apps
         case .books:
-            return "https://rss.marketingtools.apple.com/api/v2/us/books/top-free"
+            return Constants.RSSBaseURL.books
         case .audioBooks:
-            return "https://rss.marketingtools.apple.com/api/v2/us/audio-books/top"
+            return Constants.RSSBaseURL.audioBooks
         }
     }
     
     var endPoint: String {
         switch self {
-        case .music:
-            "albums"
-        case .podcasts:
-            "podcasts"
-        case .apps:
-            "apps"
-        case .books:
-            "books"
-        case .audioBooks:
-            "audio-books"
+        case .music:        return Constants.EndPoints.albums
+        case .podcasts:     return Constants.EndPoints.podcasts
+        case .apps:         return Constants.EndPoints.apps
+        case .books:        return Constants.EndPoints.books
+        case .audioBooks:   return Constants.EndPoints.audioBooks
         }
     }
     
     var iconName: String {
         switch self {
-        case .music:
-            "music.note.list"
-        case .podcasts:
-            "mic.fill"
-        case .apps:
-            "app.fill"
-        case .books:
-            "book.fill"
-        case .audioBooks:
-            "headphones"
+        case .music:        return Constants.FeedIcons.albums
+        case .podcasts:     return Constants.FeedIcons.podcasts
+        case .apps:         return Constants.FeedIcons.apps
+        case .books:        return Constants.FeedIcons.books
+        case .audioBooks:   return Constants.FeedIcons.audioBooks
         }
     }
     
-    //Colors
+    // Mark: - Colors
     var gradient: [Color] {
         switch self {
         case .music:

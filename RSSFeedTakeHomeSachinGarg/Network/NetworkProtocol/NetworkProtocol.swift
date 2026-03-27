@@ -18,5 +18,5 @@ protocol APIServiceProtocol {
 }
 
 protocol APIHandlerProtocol {
-    func performRequest(_ url: URL) async throws -> Data
+    func performRequest(_ url: URL) async throws -> (Data, URLResponse)
 }

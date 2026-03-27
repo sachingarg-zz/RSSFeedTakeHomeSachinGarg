@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-/// The app's landing screen where users select:
+/// The app's landing screen where users can select:
 /// - RSS feed category (grid UI)
-/// - Feed limit (segmented picker: 10, 25, 50)
+/// - Feed limit (segmented picker: 10, 20, 30)
 ///
 /// The screen uses "Lazy VGrid' for an App-Store style layout.
-/// Each feed card navigates to'a type-safe generic 'FeedDetailScreen"
+/// Each feed card navigates to a type-safe generic 'FeedListViewScreen"
 
 struct FeedLandingScreen: View {
     @State private var limit = 10
@@ -22,41 +22,40 @@ struct FeedLandingScreen: View {
                                                   
     var body: some View {
         NavigationStack {
-        VStack(spacing: 20) {
-            
-            VStack {
-                Text("Select Feed Limit")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                
-                Picker("limit", selection: $limit) {
-                    ForEach(limits, id: \.self) { value in
-                        Text("\(value)").tag(value)
+            VStack(spacing: 20) {
+                VStack {
+                    Text(Constants.Texts.selectFeedLimit)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    Picker("limit", selection: $limit) {
+                        ForEach(limits, id: \.self) { value in
+                            Text("\(value)").tag(value)
+                        }
                     }
+                    .pickerStyle(.segmented)
+                    .accessibilityIdentifier(Constants.AccessibiltyIdentifier.limitPicker)
                 }
-                .pickerStyle(.segmented)
-                .accessibilityIdentifier("LimitPicker")
-            }
-            .padding()
-            .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .padding(.horizontal)
-
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(FeedType.allCases) { type in
-                        NavigationLink {
-                            FeedTypeListBuilder.build(for: type, limit: limit)
-                        } label: {
-                            FeedCard(feed: type)
-                                .accessibilityIdentifier("FeedCard_\(type.rawValue)")
+                .padding()
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .padding(.horizontal)
+                
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(FeedType.allCases) { type in
+                            NavigationLink {
+                                FeedTypeListBuilder.build(for: type, limit: limit)
+                            } label: {
+                                FeedCard(feed: type)
+                                    .accessibilityIdentifier("\(Constants.AccessibiltyIdentifier.feedCard)\(type.rawValue)")
+                            }
                         }
                     }
                 }
             }
+            .navigationTitle(Constants.Texts.appTitle)
         }
-        .navigationTitle("Select Feed")
-    }
     }
 }
 

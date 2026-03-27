@@ -25,7 +25,23 @@ final class APIService: APIServiceProtocol {
         guard let url = URL(string: urlString) else {
             throw AppError.invalicUrl
         }
-        let data = try await apiHandler.performRequest(url)
-        return try ResponseDecoder.decode(T.self, data: data)
+        
+        do {
+            let (data, response) = try await apiHandler.performRequest(url)
+           
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw AppError.invalicUrl
+            }
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                throw AppError.httpStatus(httpResponse.statusCode)
+            }
+            
+            guard !data.isEmpty else { throw AppError.noData }
+            
+            return try ResponseDecoder.decode(T.self, data: data)
+        } catch {
+            throw AppError.unknown(error)
+        }
     }
 }

@@ -9,18 +9,17 @@ import Foundation
 
 typealias  FeedModelProtocol = Decodable & Identifiable & FeedDisplayable
 
-/// A unified interface for any RSS feed result item./// A unified interface for conforming to this protocol can be displayed in:
+/// A unified interface for any RSS feed result item.
 /// - Feed list screen
 /// - Detail screen
-///
 /// Required properties include:
 /// - titleText'
 /// - subtitle Text'
 /// - artworkUrl
-/// -categoryText'
+/// - categoryText'
 /// - releaseDateText
-///
-/// This enables generic UI:
+/// - previewUrlText
+/// - storeUrlText
 
 protocol FeedDisplayable {
     var id: String { get }

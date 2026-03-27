@@ -20,39 +20,41 @@ import Foundation
 /// - 'LocalizedError
 /// - Equatable' (custom implementation)
 
-enum AppError: Error {
+enum AppError: LocalizedError, Equatable {
     case invalicUrl
-    case invalidResponse
     case networkError(URLError)
-    case decodingFailure(Error)
+    case httpStatus(Int)
+    case decodingFailure(DecodingError)
     case unknown(Error)
-    case serverError(Int)
+    case noData
     
     var errorDescription: String? {
         switch self {
         case .invalicUrl:
-            return "The URl is invalid."
+            return Constants.Errors.invalidUrl
         case .networkError(let error):
-            return "Network Error: \(error.localizedDescription)"
+            return "\(Constants.Errors.networkError):\(error.localizedDescription)"
+        case .httpStatus(let invaliStatusCode):
+            return "\(Constants.Errors.invalidStatusCode):\(invaliStatusCode)"
         case .decodingFailure(let error):
-            return  "Decoding failed. \(error.localizedDescription)"
-        case .unknown:
-            return "Unknwon error occured."
-        case .invalidResponse:
-            return "invalidResponse recieved"
-        case .serverError(let statusCode):
-            return "Server Error \(statusCode)"
+            return  "\(Constants.Errors.decodingEror):\(error.localizedDescription)"
+        case .unknown(let error):
+            return "\(Constants.Errors.unknownError):\(error.localizedDescription)"
+        case .noData:
+            return Constants.Errors.nodata
         }
     }
     
-    var code: Int {
-        switch self {
-        case .invalicUrl: return 1
-        case .invalidResponse: return 2
-        case .networkError(_): return 3
-        case .decodingFailure(_): return 4
-        case .unknown(_): return 5
-        case .serverError(_): return 6
+    static func == (lhs: AppError, rhs: AppError) -> Bool {
+        switch (lhs, rhs) {
+        case (.invalicUrl, .invalicUrl): return true
+        case (.networkError(let a), .networkError(let b)): return a.code == b.code
+        case (.httpStatus(let a), .httpStatus(let b)): return a == b
+        case (.decodingFailure, .decodingFailure): return true
+        case (.unknown, .unknown): return true
+        case (.noData, .noData): return true
+        default:
+            return false
         }
     }
 }

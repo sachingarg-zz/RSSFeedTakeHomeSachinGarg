@@ -7,7 +7,14 @@
 
 import SwiftUI
 
-//This could be if need gloabal or reusable component
+/// A ErrorBannerView Display the error encounter while featching the RSS Feed.
+///
+/// Responsibilities:
+/// - Recieve Error in initializzer
+///
+/// Function
+/// - Retry to fetch the Feed Again
+
 struct ErrorBannerView: View {
     let error: AppError
     let retryAction: (() -> Void)?
@@ -25,11 +32,9 @@ struct ErrorBannerView: View {
                 .background(Color.red.opacity(0.8))
                 .cornerRadius(8)
             
-            Button("Retry") {
+            Button(Constants.Texts.retry) {
                 retryAction?()
             }
         }
-        
-        
     }
 }

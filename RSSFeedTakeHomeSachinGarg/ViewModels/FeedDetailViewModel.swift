@@ -68,10 +68,10 @@ class FeedDetailViewModel<T: FeedModelProtocol>: ObservableObject {
         
         do {
             let response: FeedResponse<T> = try await networkService.fetch(from: self.urlString)
+            guard !response.feed.results.isEmpty else { throw AppError.noData }
             self.feedItems = response.feed.results
             self.title = response.feed.title
             self.searchedItems = self.feedItems
-            self.error = nil
         } catch let appError as AppError {
             self.error = appError
         } catch let error {

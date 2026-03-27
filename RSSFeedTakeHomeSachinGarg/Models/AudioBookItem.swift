@@ -7,6 +7,20 @@
 
 import Foundation
 
+/// A model representing a AudioBook item returned from Apple RSS feed.
+///
+/// Example JSON:
+/// "id": "123"
+/// "name": "Sample Audio Book"
+/// "artistName": "Author"
+/// "releaseDate": "2024-01-01"
+/// "url": "www.apple.com/feed/ultra.pnc"
+///
+/// Conforms to:
+/// - 'Decodable'
+/// - Identifiable"
+///
+
 struct AudioBookItem: Decodable, Identifiable {
     let id: String
     let artistName: String
@@ -15,6 +29,10 @@ struct AudioBookItem: Decodable, Identifiable {
     let releaseDate: String
     let url: String
 }
+
+/// An extension use at UI representing a AudioBookItem item.
+/// Conforms to:
+/// - FeedDisplayable
 
 extension AudioBookItem: FeedDisplayable {
     var titleText: String { name }

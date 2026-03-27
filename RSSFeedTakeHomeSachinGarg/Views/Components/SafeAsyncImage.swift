@@ -31,7 +31,7 @@ struct SafeAsyncImage: View {
                     .resizable()
                     .scaledToFill()
             case .failure(_):
-                Image(systemName: "photo")
+                Image(systemName: Constants.Icons.fallBackImage)
                     .resizable()
                     .scaledToFill()
                     .foregroundColor(.gray.opacity(0.6 ))

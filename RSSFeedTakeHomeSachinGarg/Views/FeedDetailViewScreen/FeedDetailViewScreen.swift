@@ -27,13 +27,7 @@ struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                SafeAsyncImage(urlString: feed.artworkUrl, size: CGSize(width: 200, height: 200))
-                    .shadow(radius: 8)
-                    .scaleEffect(animate ? 1.04 : 1.0)
-                    .animation(.spring(duration: 0.55), value: animate)
-                    .onAppear {
-                        animate = true
-                    }
+                imageView()
                 
                 VStack {
                     //Title
@@ -41,23 +35,23 @@ struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
                         .font(.largeTitle.bold())
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
-                        .accessibilityIdentifier("Detail_Title")
+                        .accessibilityIdentifier(Constants.AccessibiltyIdentifier.detailTitle)
 
                     
                     //Artist
                     Text(feed.subtitleText)
                         .font(.title3)
                         .foregroundStyle(.secondary)
-                        .accessibilityIdentifier("Sub_Title")
+                        .accessibilityIdentifier(Constants.AccessibiltyIdentifier.subTitle)
 
                 }
                 
                 VStack(spacing: 14) {
-                    infoRow(label: "Category", value: feed.categoryText)
-                        .accessibilityIdentifier("Category")
+                    infoRow(label: Constants.Texts.category, value: feed.categoryText)
+                        .accessibilityIdentifier(Constants.AccessibiltyIdentifier.category)
 
-                    infoRow(label: "Release Date", value: feed.releaseDateText)
-                        .accessibilityIdentifier("Release_date")
+                    infoRow(label: Constants.Texts.releaseDate, value: feed.releaseDateText)
+                        .accessibilityIdentifier(Constants.AccessibiltyIdentifier.releaseDate)
 
                 }
                 .padding()
@@ -71,7 +65,7 @@ struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
                         player = AVPlayer(url: url)
                         player?.play()
                     } label: {
-                        Label("Play Review", systemImage: "play.circle.fill")
+                        Label(Constants.Texts.playReview, systemImage: Constants.Icons.play)
                             .font(.title3.bold())
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -80,16 +74,14 @@ struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .padding(.horizontal)
-                    .accessibilityIdentifier("Play_Preview")
-
-
+                    .accessibilityIdentifier(Constants.AccessibiltyIdentifier.playPreview)
                 }
                 
                 // Store Url
                 if let storeURl = feed.storeUrlText,
                    let url = URL(string: storeURl) {
                     Link(destination: url) {
-                        Label("Open in Store", systemImage: "arrow.up.forward.app")
+                        Label(Constants.Texts.openInStore, systemImage: Constants.Icons.open)
                             .font(.title3.bold())
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -98,7 +90,7 @@ struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .padding(.horizontal)
-                    .accessibilityIdentifier("Detail_OpenStore")
+                    .accessibilityIdentifier(Constants.AccessibiltyIdentifier.detailOpenStore)
 
                 }
 
@@ -106,6 +98,15 @@ struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
             .padding(.top)
         }
         .navigationBarTitleDisplayMode(.inline)
+        .onDisappear {
+            cleanup()
+        }
+    }
+    
+    private func cleanup() {
+        player?.pause()
+        player?.replaceCurrentItem(with: nil)
+        player = nil
     }
     
     @ViewBuilder
@@ -119,6 +120,17 @@ struct FeedDetailViewScreen<T: FeedModelProtocol>: View {
             Text(value)
                 .foregroundColor(.secondary)
         }
+    }
+    
+    @ViewBuilder
+    private func imageView() -> some View {
+        SafeAsyncImage(urlString: feed.artworkUrl, size: CGSize(width: 200, height: 200))
+            .shadow(radius: 8)
+            .scaleEffect(animate ? 1.04 : 1.0)
+            .animation(.spring(duration: 0.55), value: animate)
+            .onAppear {
+                animate = true
+            }
     }
 }
 

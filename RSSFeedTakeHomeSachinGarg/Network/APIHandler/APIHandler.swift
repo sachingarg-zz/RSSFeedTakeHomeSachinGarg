@@ -8,17 +8,13 @@
 import Foundation
 
 class APIHandler: APIHandlerProtocol {
-     func performRequest(_ url: URL) async throws -> Data {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            
-            guard let httpresponse = response as? HTTPURLResponse else {
-                throw AppError.invalidResponse
-            }
-            
-            guard (200...299).contains(httpresponse.statusCode) else {
-                throw AppError.serverError(httpresponse.statusCode)
-            }
-            
-            return data
+    func performRequest(_ url: URL) async throws -> (Data, URLResponse) {
+        do {
+            return try await URLSession.shared.data(from: url)
+        } catch let error as URLError {
+            throw AppError.networkError(error)
+        } catch {
+            throw AppError.unknown(error)
+        }
     }
 }

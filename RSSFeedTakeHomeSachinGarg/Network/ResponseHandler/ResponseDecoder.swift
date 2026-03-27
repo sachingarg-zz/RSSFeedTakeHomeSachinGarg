@@ -10,9 +10,9 @@ import Foundation
 class ResponseDecoder {
     static  func decode<T: Decodable>(_ type: T.Type, data: Data) throws -> T where T : Decodable {
         do {
-            return try JSONDecoder().decode(type.self, from: data )
-        } catch (let error) {
-            throw AppError.decodingFailure(error)
-        }
+            return try JSONDecoder().decode(type.self, from: data)
+        } catch let decodingError as DecodingError {
+            throw AppError.decodingFailure(decodingError)
+        } 
     }
 }
